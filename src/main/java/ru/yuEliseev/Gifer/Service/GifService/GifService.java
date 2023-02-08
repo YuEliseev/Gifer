@@ -25,34 +25,38 @@ public class GifService {
     public Gif getRandom(String tag){
         JSONObject jsonResponse = new JSONObject(gifClient.getRandomGif(gifClientConfig.getApiKey(), tag));
 
-        return new Gif(jsonResponse.getJSONObject("data"));
+        return new Gif(getJsonObjectData(jsonResponse));
     }
-
 
     public List<Gif> getSearchingResults(String search){
         JSONObject jsonResponse = new JSONObject(gifClient.getGifBySearch(gifClientConfig.getApiKey(),
                 search,
                 gifRequestConfig.getRows()));
 
-        System.out.println(gifRequestConfig.getRows());
-
         List<Gif> gifList = new ArrayList<>();
 
-        JSONArray jsonArray = jsonResponse.getJSONArray("data");
+        JSONArray jsonArray = getJsonArrayData(jsonResponse);
 
         for (int i = 0; i < jsonArray.length(); i++) {
             gifList.add(new Gif(jsonArray.getJSONObject(i)));
+
         }
 
         return gifList;
-
     }
 
     public Gif getById(String id){
 
         JSONObject jsonResponse = new JSONObject(gifClient.getGifById(gifClientConfig.getApiKey(), id));
-        return new Gif((JSONObject) jsonResponse.getJSONArray("data").get(0));
+        return new Gif((JSONObject) getJsonArrayData(jsonResponse).get(0));
     }
-    //need to refactor this
+    //get some issue with GifyAPI to get single gif by id
+
+    private JSONArray getJsonArrayData(JSONObject jsonObject){
+        return jsonObject.getJSONArray("data");
+    }
+    private JSONObject getJsonObjectData(JSONObject jsonObject){
+        return jsonObject.getJSONObject("data");
+    }
 }
 

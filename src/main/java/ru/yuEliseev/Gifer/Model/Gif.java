@@ -15,7 +15,7 @@ public class Gif {
     private String originalUrl;
     private String previewUrl;
 
-    public Gif(JSONObject jsonObject) {
+    public Gif(JSONObject jsonObject){
         this.id = jsonObject.getString("id");
         this.title = jsonObject.getString("title");
         this.originalUrl = getUrl(jsonObject, "original");

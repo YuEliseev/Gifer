@@ -12,4 +12,5 @@ import org.springframework.context.annotation.Configuration;
 public class GifClientConfig {
     private String gifUrl;
     private String apiKey;
+    private String errorGif;
 }
