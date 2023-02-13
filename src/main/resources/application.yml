@@ -1,0 +1,7 @@
+client:
+  gifUrl: https://api.giphy.com/v1/gifs
+  apiKey: CqSNQQhtyJddV3R6QPh4ZIybomx3QOT7
+  errorGif: Rkis28kMJd1aE
+
+request:
+  rows: 8
