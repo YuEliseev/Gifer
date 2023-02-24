@@ -1,6 +1,7 @@
 package ru.yuEliseev.Gifer.Service.GifService;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,10 +26,17 @@ public class GifService {
     public Gif getRandom(String tag){
         JSONObject jsonResponse = new JSONObject(gifClient.getRandomGif(gifClientConfig.getApiKey(), tag));
 
-        return new Gif(getJsonObjectData(jsonResponse));
+        try {
+            return new Gif(getJsonObjectData(jsonResponse));
+        }
+        catch (JSONException jsonException){
+            jsonException.printStackTrace();
+            return gifClientConfig.getErrorGif();
+        }
+
     }
 
-    public List<Gif> getSearchingResults(String search){
+    public List<Gif> getSearchingResults(String search) throws JSONException{
         JSONObject jsonResponse = new JSONObject(gifClient.getGifBySearch(gifClientConfig.getApiKey(),
                 search,
                 gifRequestConfig.getRows()));
@@ -48,15 +56,19 @@ public class GifService {
     public Gif getById(String id){
 
         JSONObject jsonResponse = new JSONObject(gifClient.getGifById(gifClientConfig.getApiKey(), id));
-        return new Gif((JSONObject) getJsonArrayData(jsonResponse).get(0));
+        try{
+            return new Gif((JSONObject) getJsonArrayData(jsonResponse).get(0));
+        }catch (JSONException jsonException){
+            return gifClientConfig.getErrorGif();
+        }
     }
     //get some issue with GifyAPI to get single gif by id
 
     private JSONArray getJsonArrayData(JSONObject jsonObject){
-        return jsonObject.getJSONArray("data");
+        return jsonObject.getJSONArray("datas");
     }
     private JSONObject getJsonObjectData(JSONObject jsonObject){
-        return jsonObject.getJSONObject("data");
+        return jsonObject.getJSONObject("datas");
     }
 }
 

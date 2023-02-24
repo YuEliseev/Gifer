@@ -7,7 +7,7 @@
 <body>
 
 <div th:each="gif : ${gifList}">
-    <img th:src="@{${gif.getPreviewUrl()}}" />
+    <img th:src="@{${gif.getPreviewUrl()}}"/>
     <br>
     <a th:href="@{/gif/get/{id}(id=${gif.getId()})}" th:text="view">view</a>
 </div>

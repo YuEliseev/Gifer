@@ -1,7 +1,9 @@
 client:
   gifUrl: https://api.giphy.com/v1/gifs
   apiKey: CqSNQQhtyJddV3R6QPh4ZIybomx3QOT7
-  errorGif: Rkis28kMJd1aE
+  errorGifId: 3ohzdYJK1wAdPWVk88
+  errorGifOriginal: https://media1.giphy.com/media/3ohzdYJK1wAdPWVk88/giphy.gif?cid=3180108e1b0c7cf82327ab41ff2d52f26e7e3e75d620a9ef&rid=giphy.gif&ct=g
+  errorGifPreview: https://media1.giphy.com/media/3ohzdYJK1wAdPWVk88/giphy-preview.mp4?cid=3180108e1b0c7cf82327ab41ff2d52f26e7e3e75d620a9ef&rid=giphy-preview.mp4&ct=g
 
 request:
   rows: 8

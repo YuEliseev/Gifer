@@ -3,6 +3,7 @@ package ru.yuEliseev.Gifer.Model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 @Data
@@ -15,7 +16,7 @@ public class Gif {
     private String originalUrl;
     private String previewUrl;
 
-    public Gif(JSONObject jsonObject){
+    public Gif(JSONObject jsonObject) throws JSONException {
         this.id = jsonObject.getString("id");
         this.title = jsonObject.getString("title");
         this.originalUrl = getUrl(jsonObject, "original");
