@@ -30,10 +30,8 @@ public class GifService {
             return new Gif(getJsonObjectData(jsonResponse));
         }
         catch (JSONException jsonException){
-            jsonException.printStackTrace();
             return gifClientConfig.getErrorGif();
         }
-
     }
 
     public List<Gif> getSearchingResults(String search) throws JSONException{
@@ -42,19 +40,16 @@ public class GifService {
                 gifRequestConfig.getRows()));
 
         List<Gif> gifList = new ArrayList<>();
-
         JSONArray jsonArray = getJsonArrayData(jsonResponse);
 
         for (int i = 0; i < jsonArray.length(); i++) {
             gifList.add(new Gif(jsonArray.getJSONObject(i)));
 
         }
-
         return gifList;
     }
 
     public Gif getById(String id){
-
         JSONObject jsonResponse = new JSONObject(gifClient.getGifById(gifClientConfig.getApiKey(), id));
         try{
             return new Gif((JSONObject) getJsonArrayData(jsonResponse).get(0));
@@ -62,13 +57,12 @@ public class GifService {
             return gifClientConfig.getErrorGif();
         }
     }
-    //get some issue with GifyAPI to get single gif by id
 
     private JSONArray getJsonArrayData(JSONObject jsonObject){
-        return jsonObject.getJSONArray("datas");
+        return jsonObject.getJSONArray("data");
     }
     private JSONObject getJsonObjectData(JSONObject jsonObject){
-        return jsonObject.getJSONObject("datas");
+        return jsonObject.getJSONObject("data");
     }
 }
 
